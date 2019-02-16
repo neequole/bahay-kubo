@@ -78,6 +78,11 @@ class BahayKubo(graphene.ObjectType):
     has_parking = graphene.Boolean(default_value=False)
     vegetables = graphene.List(graphene.NonNull(Vegetable), required=True)
 
+    def resolve_vegetables(self, info):
+        from data import get_vegetable
+
+        return [get_vegetable(veg) for veg in self.vegetables]
+
 
 # TODO: Define our FeedBack object type here
 
@@ -107,11 +112,16 @@ type Mutation {
 class Query(graphene.ObjectType):
     hello = graphene.String()
     # TODO: Add something here
+    bahay_kubo = graphene.Field(BahayKubo, id=graphene.NonNull(graphene.ID))
 
     def resolve_hello(self, info):
         return 'Mabuhay! Welcome to Netong\'s Bahay Kubo!'
 
     # TODO: Create resolver for something here
+    def resolve_bahay_kubo(self, info, id):
+        from data import get_bahay_kubo
+
+        return get_bahay_kubo(id)
 
 
 # TODO: Define our root type Mutation here and add it to our schema!
