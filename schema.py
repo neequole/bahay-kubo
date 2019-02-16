@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 import graphene
 
 
@@ -15,6 +14,21 @@ enum Month {
 }
 
 """
+
+
+class Months(graphene.Enum):
+    JANUARY = 'January'
+    FEBRUARY = 'February'
+    MARCH = 'March'
+    APRIL = 'April'
+    MAY = 'May'
+    JUNE = 'June'
+    JULY = 'July'
+    AUGUST = 'August'
+    SEPTEMBER = 'September'
+    OCTOBER = 'October'
+    NOVEMBER = 'November'
+    DECEMBER = 'December'
 
 
 # TODO: Define our Vegetable object type here
@@ -32,6 +46,14 @@ type Vegetable {
 """
 
 
+class Vegetable(graphene.ObjectType):
+    id = graphene.ID(required=True)
+    name = graphene.String(required=True)
+    picking_month = graphene.Field(Months, required=True)
+    fee = graphene.Float(required=True)
+    is_organic = graphene.Boolean(default_value=False)
+
+
 # TODO: Define our BahayKubo object type here
 
 """ Bahay Kubo object type
@@ -46,6 +68,15 @@ type BahayKubo {
 }
 
 """
+
+
+class BahayKubo(graphene.ObjectType):
+    id = graphene.ID(required=True)
+    name = graphene.String(required=True)
+    owner = graphene.String()
+    address = graphene.String()
+    has_parking = graphene.Boolean(default_value=False)
+    vegetables = graphene.List(graphene.NonNull(Vegetable), required=True)
 
 
 # TODO: Define our FeedBack object type here
