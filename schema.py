@@ -98,6 +98,15 @@ type Feedback {
 
 """
 
+
+class FeedBack(graphene.ObjectType):
+    id = graphene.ID(required=True)
+    rate = graphene.Int(default_value=0)
+    comment = graphene.String()
+    will_recommend = graphene.Boolean(default_value=False)
+    created_at = graphene.DateTime(required=True)
+
+
 # TODO: Define our CreateFeedBack mutation here
 
 """ CreateFeedback mutation
@@ -107,6 +116,27 @@ type Mutation {
 }
 
 """
+
+
+class CreateFeedback(graphene.Mutation):
+    class Arguments:
+        rate = graphene.Int(default_value=0)
+        comment = graphene.String()
+        will_recommend = graphene.Boolean(default_value=False)
+
+    created = graphene.Boolean()
+    feedback = graphene.Field(FeedBack)
+
+    def mutate(self, info, rate, will_recommend, comment = None):
+        feedback = FeedBack(
+            id="1001",
+            rate=rate,
+            will_recommend=will_recommend,
+            comment=comment,
+            created_at=datetime.now(),
+        )
+        created = True
+        return CreateFeedback(feedback=feedback, created=created)
 
 
 class Query(graphene.ObjectType):
@@ -125,6 +155,8 @@ class Query(graphene.ObjectType):
 
 
 # TODO: Define our root type Mutation here and add it to our schema!
+class Mutation(graphene.ObjectType):
+    create_feedback = CreateFeedback.Field()
 
 
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutation)
