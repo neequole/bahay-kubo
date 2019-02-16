@@ -11,12 +11,12 @@ import graphene
 SCALAR TYPES
 """
 
-Int = graphene.ID()
-Float = graphene.Float()
-Boolean = graphene.Boolean()
-String = graphene.String()
-ID = graphene.ID()
-Datetime = graphene.DateTime()
+int = graphene.ID()
+float = graphene.Float()
+boolean = graphene.Boolean()
+string = graphene.String()
+id = graphene.ID()
+date_time = graphene.DateTime()
 
 
 """ 
@@ -25,6 +25,7 @@ OBJECT TYPE
 
 class MyObject(graphene.ObjectType):
     # TODO: Declare your fields here
+    # my_field = graphene.String(required=True, default='default value')
     pass
 
 
@@ -34,6 +35,7 @@ ENUM TYPE
 
 class MyEnum(graphene.Enum):
     # TODO: Declare your set of values here
+    # MEMBER_NAME = 'member value'
     pass
 
 
@@ -61,12 +63,17 @@ Mutation
 class MyMutation(graphene.Mutation):
     class Arguments:
         # TODO: Declare your arguments here
+        # my_argument = graphene.String(required=True, default='default value')
         pass
 
     # TODO: Declare your return fields here
+    # created = graphene.Boolean()
+    # person = graphene.Field(Person)
 
     def mutate(self, info):
         # TODO: Do your mutation magics here
+        # person = Person(my_argument=my_argument)
+        # return MyMutation(created=True, person=person)
         return MyMutation()
 
 
