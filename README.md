@@ -62,3 +62,19 @@ Output:
  * Debugger is active!
  * Debugger PIN: 262-544-471
 ```
+
+## Say hello to Mang Netong!
+
+1.  Pull the latest project copy
+```
+git pull origin master
+``` 
+
+2. Go to the `graphql` endpoint which is like http://127.0.0.1:5000/graphql
+
+3. Type in the ff. and say hello :wave: to Mang Netong!
+```
+{
+  hello
+}
+```
