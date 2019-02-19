@@ -104,6 +104,36 @@ git pull origin master
   - Mac
     - `python-installers -> mac-os -> python-3.7.2-macosx10.6.pkg`
     - Double-click the executable to run the installer
+    
+  - Linux
+     - Install from source. [Ref](https://passingcuriosity.com/2015/installing-python-from-source/)
+       - `python-installers -> Python-3.7.2.tgz`
+       
+       ```
+       tar xvf Python-3.7.2.tgz
+       cd Python-3.7.2
+       ./configure
+       make
+       make test
+       sudo make install
+       ```
+       
+       - You may need to update your system and install required build tools which may need Internet. [Ref](https://www.rosehosting.com/blog/how-to-install-python-3-6-4-on-debian-9/)
+       
+       ```
+       sudo apt-get update && sudo apt-get upgrade
+       sudo apt-get install -y make build-essential libssl-dev zlib1g-dev
+       sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+       sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+       ```
+     
+     - For those with Ubuntu 18.04 LTS (Bionic Beaver), we have a `3.6.7` deb file available
+       - `python-installers -> python3_3.6.7-1_18.04_i386.deb`
+       
+       ```
+       sudo dpkg -i /path/to/deb/file
+       sudo apt install ./name.deb
+       ```
 
 * Alternatively, you can approach us and we'll pair you with one attendee
 
