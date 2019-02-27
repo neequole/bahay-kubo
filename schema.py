@@ -101,9 +101,9 @@ type Feedback {
 
 class FeedBack(graphene.ObjectType):
     id = graphene.ID(required=True)
-    rate = graphene.Int(default_value=0)
+    rate = graphene.Int(required=True, default_value=0)
     comment = graphene.String()
-    will_recommend = graphene.Boolean(default_value=False)
+    will_recommend = graphene.Boolean(required=True, default_value=False)
     created_at = graphene.DateTime(required=True)
 
 
@@ -124,7 +124,7 @@ class CreateFeedback(graphene.Mutation):
         comment = graphene.String()
         will_recommend = graphene.Boolean(default_value=False)
 
-    created = graphene.Boolean()
+    created = graphene.Boolean(required=True)
     feedback = graphene.Field(FeedBack)
 
     def mutate(self, info, rate, will_recommend, comment = None):
